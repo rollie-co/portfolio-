@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rahul Verma — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#120707;--panel:#1c0d0d;--line:#3a1b1a;--text:#f6ece8;--mute:#b89e98;--accent:#ff5a3c}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:400 16px/1.6 Figtree,system-ui,sans-serif}
+h1,h2,h3{font-family:'Bricolage Grotesque',Figtree,sans-serif;line-height:1.1}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+
+/* Hero: character follows cursor */
+.hero{position:relative;height:100vh;min-height:560px;overflow:hidden;background:#8a0d10}
+.stage{position:absolute;inset:-4%;will-change:transform}
+.stage img,.stage video{width:100%;height:100%;object-fit:cover;object-position:60% 30%;display:block}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(18,7,7,.75),transparent 55%),linear-gradient(0deg,var(--bg),transparent 30%)}
+.hero-txt{position:absolute;left:0;right:0;bottom:12vh;z-index:2}
+.hero h1{font-size:clamp(3rem,9vw,7rem);font-weight:800;letter-spacing:-.03em}
+.hero p{color:var(--mute);max-width:34ch;margin-top:12px;font-size:1.15rem}
+.hint{margin-top:28px;font-size:.9rem;color:var(--mute)}
+
+/* sections */
+section{padding:96px 0;border-top:1px solid var(--line)}
+section:first-of-type{border:0}
+h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:40px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+h3{font-size:1.15rem;margin:28px 0 12px}
+h3:first-child{margin-top:0}
+
+/* timeline */
+.tl{list-style:none;padding:0 0 0 22px;border-left:2px solid var(--line)}
+.tl li{position:relative;padding-bottom:28px}
+.tl li::before{content:"";position:absolute;left:-29px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.tl b{display:block;font-weight:600}
+.tl span{color:var(--mute);font-size:.95rem}
+
+/* skills */
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:.95rem}
+.chip img{width:20px;height:20px}
+.chip svg{width:20px;height:20px;fill:var(--accent)}
+.right p{color:var(--mute)}
+
+/* projects */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.card{display:block;padding:26px;border:1px solid var(--line);border-radius:14px;background:var(--panel);transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.card h3{margin:0 0 8px;display:flex;justify-content:space-between;align-items:center}
+.card h3 svg{width:20px;height:20px;fill:var(--mute)}
+.card p{color:var(--mute);font-size:.97rem}
+
+/* contact */
+.links{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border:1px solid var(--line);border-radius:10px;background:var(--panel);transition:background .2s,border-color .2s}
+.btn:hover{border-color:var(--accent)}
+.btn svg{width:20px;height:20px;fill:var(--accent)}
+.free{color:var(--mute);max-width:46ch}
+footer{padding:32px 0;border-top:1px solid var(--line);color:var(--mute);font-size:.9rem}
+
+/* floating freelancing bar (appears when scrolling down) */
+.dock{position:fixed;left:50%;bottom:20px;z-index:10;transform:translate(-50%,140%);display:flex;align-items:center;gap:14px;padding:10px 12px 10px 20px;border:1px solid var(--line);border-radius:999px;background:rgba(28,13,13,.92);backdrop-filter:blur(10px);transition:transform .35s;white-space:nowrap}
+.dock.show{transform:translate(-50%,0)}
+.dot{width:9px;height:9px;border-radius:50%;background:#3ddc84;box-shadow:0 0 0 4px rgba(61,220,132,.2)}
+.dock a.go{padding:7px 16px;border-radius:999px;background:var(--accent);color:#1a0705;font-weight:600}
+.dock .ic{display:flex;gap:6px}
+.dock .ic a{display:grid;place-items:center;width:34px;height:34px;border-radius:50%}
+.dock .ic a:hover{background:var(--line)}
+.dock svg{width:18px;height:18px;fill:var(--text)}
+
+@media(max-width:800px){.split,.grid{grid-template-columns:1fr}.split{gap:48px}.dock .ic,.dock span.t2{display:none}section{padding:72px 0}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="hero" id="hero">
+  <div class="stage" id="stage">
+    <img id="char" src="assets/character.png" alt="Cartoon portrait of Rahul">
+  </div>
+  <div class="hero-txt"><div class="wrap">
+    <h1>Rahul Verma</h1>
+    <p>Student, Developer who builds open-source tools. Let's build something.</p>
+    <div class="hint">Move your cursor — he's watching.</div>
+  </div></div>
+</header>
+
+<section id="about"><div class="wrap split">
+  <!-- LEFT: about / education timeline -->
+  <div>
+    <h2>About me</h2>
+    <p style="color:var(--mute);margin-bottom:32px">I'm a B.Tech student from Gurugram who likes turning ideas into working apps, from private chat rooms to personal clouds.</p>
+    <h3>Education</h3>
+    <ul class="tl">
+      <li><b>Class 10 and 12</b><span>DPS, Gurugram</span></li>
+      <li><b>2025: joined college</b><span>G.L. Bajaj Institute</span></li>
+      <li><b>Year 1, Semester 1</b><span>CGPA 7.2</span></li>
+      <li><b>Year 1, Semester 2</b><span>CGPA 7.9</span></li>
+    </ul>
+  </div>
+
+  <!-- RIGHT: skills / interests -->
+  <div class="right">
+    <h2>Skills and interests</h2>
+    <h3>Technical</h3>
+    <div class="chips" id="tech"></div>
+    <h3>Creative</h3>
+    <div class="chips">
+      <span class="chip"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM9 8v8l7-4z"/></svg>Video editing</span>
+      <span class="chip">DaVinci Resolve</span>
+      <span class="chip">CapCut</span>
+    </div>
+    <h3>Open to</h3>
+    <div class="chips"><span class="chip"><span class="dot"></span>Freelancing</span><span class="chip">Collaborations</span></div>
+  </div>
+</div></section>
+
+<section id="projects"><div class="wrap">
+  <h2>Projects</h2>
+  <div class="grid" id="proj"></div>
+</div></section>
+
+<section id="contact"><div class="wrap">
+  <h2>Available for freelancing</h2>
+  <p class="free">Need a website, a web app or a video edited? Send me a message .</p>
+  <div class="links" id="contactLinks"></div>
+</div></section>
+
+<footer><div class="wrap">© <span id="yr"></span> Rahul Verma</div></footer>
+
+<div class="dock" id="dock">
+  <span class="dot"></span><span>Freelancing available</span>
+  <a class="go" href="#contact">Contact me</a>
+  <span class="ic" id="dockIc"></span>
+</div>
+
+<script>
+/* ===== EDIT YOUR DETAILS HERE ===== */
+const ME={github:"https://github.com/daogi",email:"rahulverma00622@gmail.com",phone:"+91 8766282704",linkedin:""};
+const SVG={
+ gh:'<svg viewBox="0 0 24 24"><path d="M12 .5A11.5 11.5 0 0 0 8.4 22.9c.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.800 0c2.200-1.500 3.200-1.200 3.200-1.200.6 1.600.2 2.800.1 3.100.8.800 1.200 1.800 1.200 3.100 0 4.400-2.700 5.400-5.300 5.700.4.4.8 1.100.8 2.200v3.200c0 .3.2.7.8.6A11.500 11.500 0 0 0 12 .5z"/></svg>',
+ mail:'<svg viewBox="0 0 24 24"><path d="M2 5h20v14H2zm2 2v.5l8 5 8-5V7zm16 3-8 5-8-5V17h16z"/></svg>',
+ phone:'<svg viewBox="0 0 24 24"><path d="M6.600 10.800a15 15 0 0 0 6.600 6.600l2.200-2.200a1 1 0 0 1 1-.2c1.100.4 2.300.6 3.600.6a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.500a1 1 0 0 1 1 1c0 1.300.2 2.500.6 3.600a1 1 0 0 1-.2 1z"/></svg>',
+ li:'<svg viewBox="0 0 24 24"><path d="M4 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM2 9h4v12H2zm7 0h4v1.700C13.700 9.600 15 9 16.500 9 20 9 21 11 21 14.200V21h-4v-6c0-1.500-.3-2.600-1.800-2.600S13 13.600 13 15v6H9z"/></svg>',
+ ext:'<svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.400l-8.300 8.300-1.400-1.400L17.600 5H14zM5 5h6v2H7v10h10v-4h2v6H5z"/></svg>'
+};
+const TECH=[["C","c/c-original"],["C++","cplusplus/cplusplus-original"],["Python","python/python-original"],["HTML","html5/html5-original"],["CSS","css3/css3-original"],["JavaScript","javascript/javascript-original"],["React","react/react-original"],["Node.js","nodejs/nodejs-original"],["Git","git/git-original"]];
+const PROJ=[
+ ["openshelf","Free open library to read books online, track your progress, rate, and discuss with other readers. No paywall, ever."],
+ ["ghostroom","Private, disposable chat rooms with messages, voice notes, video calls and file sharing. No signup, no logs."],
+ ["unidrive","Self-hosted personal cloud that pools storage from all your devices. Store docs and photos once, access them anywhere."],
+ ["busbuddy","Know when bus fares will rise or drop. Get seasonal price forecasts and cheaper bus alternatives for any route."]
+];
+/* ================================== */
+
+const $=id=>document.getElementById(id);
+$("yr").textContent=new Date().getFullYear();
+$("tech").innerHTML=TECH.map(([n,p])=>`<span class="chip"><img loading="lazy" alt="" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${p}.svg">${n}</span>`).join("");
+$("proj").innerHTML=PROJ.map(([n,d])=>`<a class="card" target="_blank" rel="noopener" href="${ME.github}/${n}"><h3>${n}${SVG.ext}</h3><p>${d}</p></a>`).join("");
+const L=[[SVG.gh,"GitHub",ME.github],[SVG.mail,ME.email,"mailto:"+ME.email],[SVG.phone,ME.phone,"tel:"+ME.phone.replace(/\s/g,"")]];
+if(ME.linkedin)L.push([SVG.li,"LinkedIn",ME.linkedin]);
+$("contactLinks").innerHTML=L.map(([i,t,h])=>`<a class="btn" href="${h}" target="_blank" rel="noopener">${i}${t}</a>`).join("");
+$("dockIc").innerHTML=L.map(([i,t,h])=>`<a href="${h}" aria-label="${t}" target="_blank" rel="noopener">${i}</a>`).join("");
+
+/* dock shows after scrolling past the hero start */
+const dock=$("dock");
+addEventListener("scroll",()=>dock.classList.toggle("show",scrollY>innerHeight*.35),{passive:true});
+
+/* ===== Character interaction =====
+ Mode A: if assets/character.mp4 exists, cursor X scrubs the video (CursorScrubVideo logic).
+ Mode B (default): the character image tilts/parallaxes toward the cursor. */
+const hero=$("hero"),stage=$("stage");
+let tx=.5,ty=.5,cx=.5,cy=.5,vid=null,cur=0,seeking=false,ready=false;
+hero.addEventListener("pointermove",e=>{const r=hero.getBoundingClientRect();tx=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width));ty=Math.min(1,Math.max(0,(e.clientY-r.top)/r.height))});
+hero.addEventListener("pointerleave",()=>{tx=.5;ty=.5});
+
+const v=document.createElement("video");
+v.muted=true;v.playsInline=true;v.preload="auto";v.disableRemotePlayback=true;v.src="assets/character.mp4";
+v.addEventListener("canplaythrough",()=>{
+  if(vid)return;vid=v;stage.replaceChild(v,$("char"));
+  v.play().then(()=>v.pause()).catch(()=>{});v.currentTime=0;ready=true;
+},{once:true});
+v.addEventListener("seeking",()=>seeking=true);
+v.addEventListener("seeked",()=>seeking=false);
+v.load();
+
+const still=matchMedia("(prefers-reduced-motion:reduce)").matches;
+(function loop(){
+  if(!still){
+    cx+=(tx-cx)*.12;cy+=(ty-cy)*.12;
+    if(vid&&ready&&isFinite(v.duration)){
+      cur+=(tx*v.duration-cur)*.22;
+      if(!seeking&&Math.abs(v.currentTime-cur)>.008)v.currentTime=cur;
+    }else{
+      stage.style.transform=`translate(${(.5-cx)*-40}px,${(.5-cy)*-24}px) rotate(${(cx-.5)*2}deg) scale(1.04)`;
+    }
+  }
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
